@@ -132,32 +132,7 @@ fun sendNotification(context: Context, titleKey: String,descriptionKey: String,d
 
 }
 
-
-
-/*fun sendNotification(context: Context) {
-    val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    val intent = Intent(context, NotificationReceiver::class.java)
-    val pendingIntent = PendingIntent.getBroadcast(
-        context,
-        0,
-        intent,
-        PendingIntent.FLAG_MUTABLE
-    )
-    val intervalMillis = 6 * 1000 // 5 seconds
-    alarmManager.setRepeating(
-        AlarmManager.RTC_WAKEUP,
-        System.currentTimeMillis(),
-        intervalMillis.toLong(),
-        pendingIntent
-    )
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = System.currentTimeMillis()
-    calendar.add(Calendar.SECOND, 5)
-    alarmManager.set(
-        AlarmManager.RTC_WAKEUP,
-        calendar.timeInMillis,
-        pendingIntent
-    )
+/*
     val timer = Timer()
     timer.schedule(object : TimerTask() {
         override fun run() {
@@ -167,7 +142,6 @@ fun sendNotification(context: Context, titleKey: String,descriptionKey: String,d
 }*/
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
@@ -175,6 +149,3 @@ fun DefaultPreview() {
 }
 
 const val PREFS_NAME = "com.example.app.PREFS"
-const val SWITCH_STATE_KEY = "switch_state"
-const val CHANNEL_ID = "com.example.app.CHANNEL_ID"
-const val NOTIFICATION_ID = 1
