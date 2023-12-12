@@ -1,6 +1,7 @@
 package com.example.notificationtimer
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
@@ -15,6 +16,7 @@ import androidx.core.app.NotificationManagerCompat
 
 class NotificationReceiver : BroadcastReceiver() {
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context, intent: Intent) {
         val titleKey = intent.getStringExtra("titleKey")
         val descriptionKey = intent.getStringExtra("descriptionKey")
@@ -26,7 +28,7 @@ class NotificationReceiver : BroadcastReceiver() {
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("$titleKey")
-            .setContentText("$descriptionKey")
+            .setContentText("Осталось $descriptionKey не забывайте!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
 
@@ -39,6 +41,15 @@ class NotificationReceiver : BroadcastReceiver() {
             notificationManager.createNotificationChannel(channel)
         }
 
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            return
+        }
         notificationManager.notify(notificationId, notificationBuilder.build())
     }
 }
